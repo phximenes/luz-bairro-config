@@ -1,19 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-# TODO(aluno): troque cicd-prod pelo seu projeto de producao ($PROD_NS).
-namespace: luz-prd
+namespace: cicd-prod-phximenes
 
 resources:
   - ../../base
 
-# Producao NAO e construida: usa a MESMA imagem de dev, identificada pelo digest.
-# O digest (e APP_VERSION) so mudam por pull request de promocao (config/scripts/promover.sh).
-# TODO(aluno): em newName, troque cicd-dev pelo seu projeto de DESENVOLVIMENTO ($DEV_NS),
-# porque e la que o pipeline publica a imagem.
 images:
   - name: luz-bairro
-    newName: image-registry.openshift-image-registry.svc:5000/luz-dev/luz-bairro
+    newName: image-registry.openshift-image-registry.svc:5000/cicd-dev-phximenes/luz-bairro
     digest: sha256:85627b813bbe19b019470818ea5c0b3f4e1286f9f001c38a903d340eaada6099
 
 configMapGenerator:
